@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="CENTER" gridLinesVisible="false" hgap="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" vgap="10.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="main.Controller">
+  <children>
+    <TabPane prefHeight="516.0" prefWidth="800.0" tabClosingPolicy="UNAVAILABLE" GridPane.columnIndex="0" GridPane.rowIndex="0">
+      <tabs>
+        <Tab text="Run Simulation">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab text="Manage Players">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+          </content>
+        </Tab>
+        <Tab text="   About    ">
+          <content>
+            <AnchorPane id="Content" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-font-size: 1.4em;">
+              <children>
+                <TextArea disable="false" editable="false" focusTraversable="false" layoutX="14.0" layoutY="50.0" mouseTransparent="true" prefHeight="106.0" prefWidth="728.0" text="The Monte Carlo Tennis Simulator is an open-source Java application written by Zach Jones at Marshall University.  The application was developed to accompany the final project of MTH411 - Mathematical Modeling in Spring 2016.  The aim of this application is to predict the outcome of tennis matchups using a Monte Carlo simulation." visible="true" wrapText="true" />
+                <Text layoutX="43.0" layoutY="38.0" scaleX="2.183460003219161" scaleY="1.9716165317869578" strokeType="OUTSIDE" strokeWidth="0.0" text="About">
+                  <font>
+                    <Font name="Lucida Sans Demibold" size="16.0" fx:id="x1" />
+                  </font>
+                </Text>
+                <Text font="$x1" layoutX="73.0" layoutY="197.0" scaleX="2.183460003219161" scaleY="1.9716165317869578" strokeType="OUTSIDE" strokeWidth="0.0" text="Instructions" />
+                <TextArea disable="false" editable="false" focusTraversable="false" layoutX="14.0" layoutY="209.0" mouseTransparent="true" prefHeight="314.0" prefWidth="728.0" text="You need two or more players before a simulation can be started.  You can manage players in the &quot;Manage Players&quot; tab.  The application comes with a few players already created.  If you want to add a new player, you'll need to specify the player's name as well as the player's &quot;Ability Matrix&quot; which describes how the player responds to different types of shots.&#10;&#10;Navigate to the &quot;Run Simulation&quot; tab to begin a new simulation.  Select one player to be Player 1 and a second player to be Player 2.  By default, player one will always serve first.  After choosing the players, select the other options for the match.  You can simulate a match that is a single set, best of three, or best of five.  You can also choose the court surface.&#10;&#10;Choose the number of matches to play, then click the &quot;Start&quot; button to run the simulation&#10;" visible="true" wrapText="true" />
+              </children>
+            </AnchorPane>
+          </content>
+        </Tab>
+      </tabs>
+    </TabPane>
+  </children>
+  <columnConstraints>
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="10.0" prefWidth="800.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="600.0" valignment="CENTER" vgrow="ALWAYS" />
+  </rowConstraints>
+</GridPane>
