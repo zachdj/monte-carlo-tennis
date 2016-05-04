@@ -20,6 +20,7 @@ public class GameScore implements Score {
     }
 
     //Adds to player 1's score and checks for game ending conditions
+    @Override
     public void addPlayer1Score() throws ScoreChangeInvalidException{
         //check game over
         if(!this.gameOver){
@@ -31,6 +32,7 @@ public class GameScore implements Score {
         }
     }
 
+    @Override
     public void addPlayer2Score() throws ScoreChangeInvalidException{
         //check game over
         if(!this.gameOver){
@@ -74,16 +76,16 @@ public class GameScore implements Score {
     }
 
     //method to test class
-    public static void main(String[] args){
-        GameScore aGame = new GameScore();
-        Random generator = new Random();
-
-        for(int i = 0; i < 5; i++){
-            try {
-                aGame.addPlayer1Score();
-            } catch(Exception ex){
-                System.out.println(ex.getMessage());
-            }
-        }
-    }
+//    public static void main(String[] args){
+//        GameScore aGame = new GameScore();
+//        Random generator = new Random();
+//
+//        for(int i = 0; i < 5; i++){
+//            try {
+//                aGame.addPlayer1Score();
+//            } catch(Exception ex){
+//                System.out.println(ex.getMessage());
+//            }
+//        }
+//    }
 }
