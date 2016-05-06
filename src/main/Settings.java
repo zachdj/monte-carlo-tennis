@@ -102,7 +102,7 @@ public class Settings {
                 {0,0,0,0,0,0,0,0,0,1,0}
         };
         ServeStats dogServeStats = new ServeStats(0, 0, 0, 0);
-        Player DOG = new Player("Dog", godMatrix, godServeStats);
+        Player DOG = new Player("Dog", dogMatrix, dogServeStats);
         players.add(DOG);
 
         return players;
