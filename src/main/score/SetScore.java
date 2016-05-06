@@ -116,10 +116,41 @@ public class SetScore implements Score {
         return this.player1Games!=0 || this.player2Games!=0;
     }
 
+    public boolean servingToDeuceSide(){
+        if(!this.isSetOver()){
+            if(this.setTiebreak == null){ //if the set is NOT in a tiebreak
+                return this.currentGame.servingToDeuceSide();
+            } else { //if the set IS in a tiebreak
+                return this.setTiebreak.servingToDeuceSide();
+            }
+        } else return false;
+    }
+
+    public int getServingPlayer(){
+        if(!this.isSetOver()){
+            if(this.setTiebreak == null){ //if the set is NOT in a tiebreak
+                return (this.player1Games + this.player2Games) % 2 + 1;  //returns 1 if the sum of games is even and 2 if the sum of games is odd
+            } else { //if the set IS in a tiebreak
+                return this.setTiebreak.getServingPlayer();
+            }
+        } else return 1;
+    }
+
     public String toString(){
         String ret = this.player1Games + "-" + this.player2Games + " ";
         if(this.setTiebreak!=null && this.setTiebreak.isTiebreakOver()){
             ret += this.setTiebreak.toScoreLine() + " ";
+        }
+        return ret;
+    }
+
+    public String getFullScore(){
+        String ret = this.player1Games + "-" + this.player2Games + " ";
+        if(this.setTiebreak!=null && this.setTiebreak.isTiebreakOver()){
+            ret += this.setTiebreak.toScoreLine() + " ";
+        }
+        if(this.currentGame!=null && !this.currentGame.isGameOver() && this.setTiebreak==null){
+            ret += "\n" + this.currentGame.toString();
         }
         return ret;
     }

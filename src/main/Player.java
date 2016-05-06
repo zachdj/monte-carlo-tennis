@@ -15,6 +15,9 @@ public class Player {
 
     public Player(String name, double[][] matrix, ServeStats serveStats){
         this.name = name;
+        if(matrix.length != Settings.STATE_VECTOR_LENGTH || matrix[0].length != Settings.STATE_VECTOR_LENGTH){
+            System.out.println("WARNING!! Player matrix of wrong shape.  A square matrix of size " + Settings.STATE_VECTOR_LENGTH + " is required.");
+        }
         this.matrix = new Matrix(matrix);
         this.serveStats = serveStats;
     }
@@ -33,6 +36,10 @@ public class Player {
 
     public void setMatrix(Matrix matrix) {
         this.matrix = matrix;
+    }
+
+    public ServeStats getServeStats(){
+        return this.serveStats;
     }
 
     public String toString(){

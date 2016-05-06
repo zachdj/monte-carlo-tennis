@@ -104,12 +104,46 @@ public class MatchScore implements Score {
         return ret;
     }
 
+    public String getFullScore(){
+        String ret = "";
+        for(int i = 0; i < this.sets.length; i++){
+            if(this.sets[i].isSetStarted()){
+                ret += this.sets[i].getFullScore();
+            }
+        }
+        return ret;
+    }
+
     public boolean isMatchOver(){
         return this.matchOver;
     }
 
     public boolean didPlayer1Win(){
         return this.matchOver && this.player1Won;
+    }
+
+    public boolean servingToDeuceSide(){
+        for(int i = 0; i < this.sets.length; i++){
+            //Find the first set that's not over, and call that set's servingToDeuceSide method
+            if(!this.sets[i].isSetOver()){
+                return this.sets[i].servingToDeuceSide();
+            }
+        }
+        return false;  //This statement will only be reached if the match is over (in which case it doesn't matter which side)
+    }
+
+    /**
+     * Determines which player should currently be serving.
+     * @return 1 for player1, 2 for player2
+     */
+    public int getServingPlayer(){
+        for(int i = 0; i < this.sets.length; i++){
+            //Find the first set that's not over, and call that set's getServingPlayer method to find the currently serving player
+            if(!this.sets[i].isSetOver()){
+                return this.sets[i].getServingPlayer();
+            }
+        }
+        return 1;  //This statement will only be reached if the match is over (in which case it doesn't matter who is serving)
     }
 
 //    public static void main(String[] args){

@@ -75,6 +75,10 @@ public class GameScore implements Score {
         return this.gameOver && this.player1Won;
     }
 
+    public boolean servingToDeuceSide(){
+        return (this.player1Points + this.player2Points) % 2 == 0; //event # of points played -> true
+    }
+
     //method to test class
 //    public static void main(String[] args){
 //        GameScore aGame = new GameScore();

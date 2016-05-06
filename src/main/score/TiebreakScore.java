@@ -73,6 +73,30 @@ public class TiebreakScore implements Score {
         return this.tbOver && this.player1Won;
     }
 
+    public boolean servingToDeuceSide(){
+        return (this.player1Points + this.player2Points) % 2 == 0; //event # of points played -> true
+    }
+
+    public int getServingPlayer(){
+        if(!this.isTiebreakOver()){
+            //edge case: first point - player 1 serves
+            if(this.player1Points ==0 && this.player2Points == 0){
+                return 1;
+            } else{
+                // "reflect" the current score back to one of the 2nd, 3rd, 4th, or 5th points of the TB
+                int sum = this.player1Points + this.player2Points;
+                while(sum > 4){
+                    sum -= 4;
+                }
+                if(sum == 1 || sum == 2){
+                    return 2; // Player 2 serves the 2nd and 3rd points
+                } else{
+                    return 1; // Player 1 serves the 4th and 5th points
+                }
+            }
+        } else return 1;
+    }
+
     public String toScoreLine(){
         if(this.didPlayer1Win()){
             return "(" + this.player2Points + ")";
