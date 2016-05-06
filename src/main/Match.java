@@ -309,6 +309,32 @@ public class Match {
         }
     }
 
+    private Matrix findSteadyState(int player, int maxIterations, Matrix startingState){
+        double epsilon = 10e-8; //stopping threshold
+        Matrix T = this.getTransitionMatrix();
+
+        Matrix lastState, currentState;
+        if(player==1){
+            lastState = startingState;
+            currentState = lastState.times(T).times(T); // state N+2
+        } else{
+            lastState = startingState.times(T);
+            currentState = lastState.times(T).times(T); // state N+2
+        }
+
+        boolean stop = false;
+        int counter = 1;
+        while(!stop && counter < maxIterations){
+            lastState = currentState;
+            currentState = lastState.times(T).times(T);
+            if(currentState.minus(lastState).normInf() < epsilon){
+                stop = true;
+            }
+        }
+
+        return currentState;
+    }
+
     // Test class
     public static void main(String[] args){
         double player1Wins = 0;
@@ -317,21 +343,26 @@ public class Match {
 
 
         Player p1 = Settings.getPreloadedPlayers().get(0); //Fed
-//        Player p2 = Settings.getPreloadedPlayers().get(1); //Nadal on clay
-        Player p2 = Settings.getPreloadedPlayers().get(2); //Nadal on Hard
+        Player p2 = Settings.getPreloadedPlayers().get(1); //Nadal on clay
+//        Player p2 = Settings.getPreloadedPlayers().get(2); //Nadal on Hard
 
-        for(int i = 0; i < trials; i++){
-            int maxSets = 3;
+        Match m = new Match(p1, p2, 3);
 
-            Match match = new Match(p1, p2, maxSets);
-            if(match.playMatch(false)){
-                player1Wins++;
-            } else{
-                player2Wins++;
-            }
+        double[][] start = {{0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        Matrix startRow = new Matrix(start);
+        double[] rafaSteady = m.findSteadyState(2, 1000, startRow).getArray()[0];
+        System.out.print("Rafa steady: [ ");
+        for(int i = 0; i < rafaSteady.length; i++){
+            System.out.print(rafaSteady[i] + ", ");
         }
+        System.out.print("]\n");
 
-        System.out.println("Player 1 Wins " + (player1Wins/ trials)*100 + "% of the time");
-        System.out.println("Player 2 Wins " + (player2Wins/ trials)*100 + "% of the time");
+        double[] fedSteady = m.findSteadyState(1, 1000, startRow).getArray()[0];
+        System.out.print("Fed steady: [ ");
+        for(int i = 0; i < fedSteady.length; i++){
+            System.out.print(fedSteady[i] + ", ");
+        }
+        System.out.print("]\n");
+
     }
 }
